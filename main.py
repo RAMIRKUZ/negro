@@ -1,64 +1,43 @@
-class Pet:
-    def __init__(self, name, typee, sound):
-        self.name = name
-        self.type = typee
-        self.sound = sound
-    
-    def play_sound(self):
-        print(f"{self.type} named {self.name} says: {self.sound}")
-
 class Human:
-    def __init__(self, name, age, pets = None):
+    def __init__(self, name, age, iin):
         self.name = name
         self.age = age
-        self.pets = []
-
-    def get_pet(self, pet):
-        if isinstance(pet,Pet):
-            print(f"Can't get a pet")
-            return
-        else:
-            print(f"{self.name} has taken {pet}")
-            self.pets.append(pet)
-
-    def play_with_pets(self):
-        if self.pets:
-            print(f"{self.name} is playing with his pets")
-            for pet in self.pets:
-                pet.play_sound()
-        else:
-            print(f"{self.name} has no pets to play with")
-
-class House:
-    def __init__(self, adress, owner):
-        self.adress = adress
-        self.owner = owner
-        self.people = []
-
-    def move_in(self, human):
-        if not isinstance(human,Human):
-            print("You can't move in :(")
-        else:
-            self.people.append(human)
-            print("You have been succesfully moved in!")
+        self.iin = iin
     
-    def who_lives(self):
-        if self.people:
-            print("Who lives here:")
-            for people in self.people:
-                print(people.name)
-                if people.pets:
-                    for pet in people.pets:
-                        print(pet.name)
+    def introduce(self):
+        print(f"Hello! My name is {self.name}")
 
-murzik = Pet("Murzik", "Cat", "Meow")
-bob = Human("Bob", 24)
+class Student(Human):
+    def __init__(self, name, age, iin, group, gpa):
+        super().__init__(name, age, iin)
+        self.group = group
+        self.gpa = gpa
+    
+    def introduce(self):
+        super().introduce()
+        print(f"My group is {self.group}. My gpa is {self.gpa }")
 
-bob.play_with_pets()
-bob.get_pet(murzik)
-bob.play_with_pets()
+class Teach(Human):
+    def __init__(self, name, age, iin, subject):
+        super().__init__(name, age, iin)
+        self.subject = subject
+        self.grouplist = []
 
-Dom = House("Bukhar Zhirau 21", "Aleksei")
-Dom.who_lives()
-Dom.move_in(bob)
-Dom.who_lives()
+    def addgroup(self, group):
+        self.grouplist.append(group)
+
+    def introduce(self):  
+        print(f"I teach {self.subject} in groups: ")
+        for items in self.grouplist:
+            print(items)
+
+Bob = Student("Bob", 19, 111112501124, "1303", 3.52)
+Bob.introduce()
+
+Nigger = Teach("Nigger", 52, 52525255252, "Niggerology")
+Nigger.addgroup('1234')
+Nigger.addgroup('7788')
+Nigger.addgroup('1454')
+Nigger.addgroup('1666')
+Nigger.addgroup('1212')
+Nigger.introduce()
